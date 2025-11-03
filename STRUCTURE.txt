@@ -1,0 +1,248 @@
+FINANCIAL MARKET ANALYSIS TOOLKIT - PROJECT STRUCTURE
+=====================================================
+
+Root Directory
+├── README.md                    # Documentación principal del proyecto
+├── requirements.txt             # Dependencias de Python
+├── setup.py                     # Configuración de instalación
+├── .gitignore                   # Archivos a ignorar en Git
+├── .env.example                 # Plantilla para variables de entorno
+├── LICENSE                      # Licencia MIT
+├── CONTRIBUTING.md              # Guía de contribución
+├── GITHUB_SETUP.md              # Instrucciones para subir a GitHub
+├── PROJECT_SUMMARY.md           # Resumen completo del proyecto
+├── pytest.ini                   # Configuración de pytest
+├── main.py                      # Script principal CLI
+│
+├── src/                         # CÓDIGO FUENTE PRINCIPAL
+│   ├── __init__.py
+│   │
+│   ├── models/                  # MODELOS DE DOMINIO
+│   │   ├── __init__.py
+│   │   ├── price_series.py      # DataClass para series de precios
+│   │   └── portfolio.py         # DataClass para carteras
+│   │
+│   ├── extractors/              # EXTRACTORES DE DATOS
+│   │   ├── __init__.py
+│   │   ├── base.py              # Clase base abstracta
+│   │   └── yahoo_finance.py     # Implementación Yahoo Finance
+│   │
+│   ├── processors/              # PROCESAMIENTO DE DATOS
+│   │   ├── __init__.py
+│   │   ├── cleaner.py           # Limpieza de datos
+│   │   └── validator.py         # Validación de datos
+│   │
+│   ├── reporting/               # GENERACIÓN DE INFORMES
+│   │   ├── __init__.py
+│   │   ├── markdown_report.py   # Informes en Markdown
+│   │   └── plots.py             # Generación de gráficos
+│   │
+│   └── utils/                   # UTILIDADES
+│       ├── __init__.py
+│       └── helpers.py           # Funciones auxiliares
+│
+├── examples/                    # EJEMPLOS DE USO
+│   ├── 01_basic_extraction.py   # Extracción básica de datos
+│   ├── 02_portfolio_creation.py # Creación de carteras
+│   ├── 03_monte_carlo.py        # Simulación Monte Carlo
+│   └── 04_custom_data.py        # Trabajo con datos custom
+│
+├── tests/                       # TESTS UNITARIOS
+│   ├── __init__.py
+│   └── test_price_series.py     # Tests de PriceSeries
+│
+└── docs/                        # DOCUMENTACIÓN
+    ├── ARCHITECTURE.md          # Documentación de arquitectura
+    ├── DIAGRAM.md               # Diagramas del sistema
+    └── QUICKSTART.md            # Guía de inicio rápido
+
+
+DESCRIPCIÓN DE COMPONENTES PRINCIPALES
+=======================================
+
+1. PriceSeries (src/models/price_series.py)
+   - Representación estandarizada de series temporales
+   - Cálculo automático de estadísticas
+   - Métodos: sharpe_ratio(), annualized_return(), max_drawdown()
+   - ~350 líneas de código
+
+2. Portfolio (src/models/portfolio.py)
+   - Gestión de carteras de inversión
+   - Simulación Monte Carlo integrada
+   - Métodos: report(), plots_report(), monte_carlo_simulation()
+   - ~480 líneas de código
+
+3. YahooFinanceExtractor (src/extractors/yahoo_finance.py)
+   - Extracción de datos de Yahoo Finance
+   - Soporte: acciones, índices, ETFs, crypto, forex
+   - Descarga concurrente de múltiples símbolos
+   - ~250 líneas de código
+
+4. DataCleaner (src/processors/cleaner.py)
+   - Limpieza y preprocesado de datos
+   - Manejo de valores faltantes y outliers
+   - Alineación de múltiples series
+   - ~250 líneas de código
+
+5. DataValidator (src/processors/validator.py)
+   - Validación de calidad de datos
+   - Conversión de inputs arbitrarios
+   - Generación de reportes de calidad
+   - ~350 líneas de código
+
+6. MarkdownReporter (src/reporting/markdown_report.py)
+   - Generación de informes en Markdown
+   - Análisis detallado de carteras
+   - Advertencias y recomendaciones
+   - ~300 líneas de código
+
+7. PlotGenerator (src/reporting/plots.py)
+   - Generación de visualizaciones profesionales
+   - 7+ tipos de gráficos diferentes
+   - Integración con matplotlib y seaborn
+   - ~550 líneas de código
+
+
+FLUJO DE DATOS
+==============
+
+Usuario → Extractor → API Externa
+                ↓
+         PriceSeries (estandarizado)
+                ↓
+         DataCleaner/Validator
+                ↓
+         PriceSeries (limpio)
+                ↓
+         Portfolio (composición)
+                ↓
+    ┌───────────┼───────────┐
+    ↓           ↓           ↓
+Statistics  MonteCarlo  Reporting
+    ↓           ↓           ↓
+Console    Markdown     Plots
+
+
+CARACTERÍSTICAS PRINCIPALES
+============================
+
+✓ Extracción de datos desde múltiples fuentes
+✓ Formato estandarizado independiente de la fuente
+✓ Descarga concurrente de N series
+✓ DataClasses con validación automática
+✓ Cálculo automático de estadísticas básicas
+✓ Simulación Monte Carlo configurable
+✓ Limpieza y validación de datos
+✓ Aceptación de inputs arbitrarios
+✓ Generación de informes en Markdown
+✓ Visualizaciones profesionales
+✓ CLI integrado
+✓ Tests unitarios
+✓ Documentación completa
+
+
+MÉTRICAS DEL PROYECTO
+======================
+
+Líneas de código:     ~3,500
+Archivos Python:      15
+Archivos de ejemplo:  4
+Archivos de test:     2
+Archivos de docs:     5
+Archivos de config:   6
+
+DataClasses:          2 principales
+Extractores:          1 completo
+Módulos procesamiento: 2
+Módulos reporting:    2
+Tipos de gráficos:    7+
+Métodos estadísticos: 20+
+
+
+TECNOLOGÍAS UTILIZADAS
+=======================
+
+Core:
+- Python 3.8+
+- pandas, numpy, scipy
+
+Data Extraction:
+- yfinance
+- requests
+
+Visualization:
+- matplotlib
+- seaborn
+- plotly
+
+Validation:
+- pydantic
+
+Utilities:
+- loguru (logging)
+- tqdm (progress bars)
+- tabulate (tables)
+
+Testing:
+- pytest
+- pytest-cov
+
+Development:
+- black (formatting)
+- flake8 (linting)
+- mypy (type checking)
+
+
+PATRONES DE DISEÑO IMPLEMENTADOS
+==================================
+
+1. Strategy Pattern
+   - BaseExtractor con múltiples implementaciones
+
+2. Composition Pattern
+   - Portfolio compuesto de PriceSeries
+
+3. Factory Pattern
+   - DataValidator.convert_arbitrary_input()
+
+4. Template Method Pattern
+   - BaseExtractor.get_multiple_series()
+
+
+PRINCIPIOS SOLID
+================
+
+✓ Single Responsibility: Cada clase tiene una responsabilidad
+✓ Open/Closed: Extensible sin modificar código existente
+✓ Liskov Substitution: Extractores intercambiables
+✓ Interface Segregation: Interfaces específicas y pequeñas
+✓ Dependency Inversion: Dependencia de abstracciones
+
+
+PRÓXIMOS PASOS
+==============
+
+1. Subir a GitHub
+2. Crear release inicial (v0.1.0)
+3. Añadir más extractores (Alpha Vantage, Polygon)
+4. Implementar optimización de carteras
+5. Añadir backtesting de estrategias
+6. Crear API REST con FastAPI
+7. Desarrollar frontend con React
+8. Integrar base de datos PostgreSQL
+
+
+CONTACTO Y CONTRIBUCIÓN
+========================
+
+- GitHub: [Tu repositorio]
+- Issues: Para reportar bugs o sugerir features
+- Pull Requests: Bienvenidas siguiendo CONTRIBUTING.md
+- Licencia: MIT (ver LICENSE)
+
+
+=====================================================
+Proyecto completado: 2024
+Autor: MIAX Student
+Versión: 0.1.0
+=====================================================
