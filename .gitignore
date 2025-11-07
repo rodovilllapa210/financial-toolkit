@@ -134,9 +134,4 @@ dmypy.json
 Thumbs.db
 
 # Project specific
-reports/
-data/
-*.csv
-*.xlsx
-*.json
-!examples/*.json
+
