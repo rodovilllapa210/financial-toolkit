@@ -6,7 +6,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 setup(
     name="financial-toolkit",
     version="0.1.0",
-    author="MIAX Student",
+    author="Rodolfo Villena Lapaz",
     author_email="your.email@example.com",
     description="Professional financial market analysis toolkit",
     long_description=long_description,

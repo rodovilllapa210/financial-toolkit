@@ -1,5 +1,5 @@
 """
-Stooq data extractor (Versión B – Pro / Inteligente).
+Stooq data extractor.
 
 Características:
 - Sin pandas_datareader: descarga directa del CSV oficial de Stooq.
